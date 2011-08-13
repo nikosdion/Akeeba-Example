@@ -52,6 +52,8 @@ class AkeebaHelperApi
 	 */
 	public function doQuery($method, $params = array(), $component = 'com_akeeba')
 	{
+		JLog::add('Preparing to perform remote API call to '.$method, JLog::DEBUG);
+		
 		$url = $this->getURL();
 		
 		$query = $this->prepareQuery($method, $params, $component);
@@ -60,7 +62,10 @@ class AkeebaHelperApi
 		
 		$result->body->data = json_decode($result->body->data);
 
-		if(is_null($result->body->data)) throw new Exception('Invalid body data');
+		if(is_null($result->body->data)) {
+			JLog::add('Invalid (null) body data', JLog::ERROR);
+			throw new Exception('Invalid body data');
+		}
 
 		return $result;
 	}
@@ -94,6 +99,7 @@ class AkeebaHelperApi
 		}
 		
 		if($response->code != 200) {
+			JLog::add('HTTP error '.$response->code, JLog::ERROR);
 			throw new Exception('HTTP Error '.$response->code);
 		}
 		
@@ -109,6 +115,8 @@ class AkeebaHelperApi
 		$result = json_decode($json, false);
 		
 		if(is_null($result)) {
+			JLog::add('JSON decoding error', JLog::ERROR);
+			JLog::add($json, JLog::DEBUG);
 			throw new Exception('JSON decoding error');
 		}
 		return $result;
@@ -259,6 +267,7 @@ class AkeebaHelperApi
 		if(method_exists($this, $method)) {
 			return $this->$method();
 		} else {
+			JLog::add("Unknown property $name in ".__CLASS__, JLog::WARNING);
 			user_error("Unknown property $name in ".__CLASS__, E_WARNING);
 		}
 	}
@@ -274,6 +283,7 @@ class AkeebaHelperApi
 		if(method_exists($this, $method)) {
 			$this->$method($value);
 		} else {
+			JLog::add("Unknown property $name in ".__CLASS__, JLog::WARNING);
 			user_error("Unknown property $name in ".__CLASS__, E_WARNING);
 		}
 	}
