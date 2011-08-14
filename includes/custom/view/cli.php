@@ -1,32 +1,21 @@
 <?php
-defined('_JEXEC') or die();
+defined('JPATH_PLATFORM') or die();
 
 jimport('joomla.application.component.view');
 
-class AkeebaViewList extends JView
+// =========================================================================
+// JView was never designed to be CLI-friendly or do as much as run outside
+// of Joomla!, the CMS. We have to do a certain amount of fine trickery,
+// overriding JView's functions which are tied to the CMS with code which
+// does take into account that *there is no CMS running*.
+// 
+// IMPORTANT: The default layout is "txt" instead of "default", for convenience
+// sake (so that you can have dual mode CLI + web apps)
+// =========================================================================
+
+
+class CustomViewCli extends JView
 {
-	public function display($tpl = null) {
-		$model = $this->getModel();
-		$list = $model->getList();
-		
-		$this->assignRef('items', $list);
-		
-		parent::display($tpl);
-	}
-	
-	protected function _setPath($type, $path)
-	{
-		jimport('joomla.application.helper');
-		$component = 'com_example';
-		$app = JCli::getInstance('Akeeba');
-
-		// Clear out the prior search dirs
-		$this->_path[$type] = array();
-
-		// Actually add the user-specified directories
-		$this->_addPath($type, $path);
-	}
-	
 	public function __construct($config = array())
 	{
 		// Set the view name
@@ -93,8 +82,20 @@ class AkeebaViewList extends JView
 		}
 		else
 		{
-			$this->setLayout('default');
+			$this->setLayout('txt');
 		}
+	}
+	
+	protected function _setPath($type, $path)
+	{
+		jimport('joomla.application.helper');
+		$component = 'com_example';
+
+		// Clear out the prior search dirs
+		$this->_path[$type] = array();
+
+		// Actually add the user-specified directories
+		$this->_addPath($type, $path);
 	}
 	
 	public function loadTemplate($tpl = null)
@@ -122,7 +123,7 @@ class AkeebaViewList extends JView
 		// If alternate layout can't be found, fall back to default layout
 		if ($this->_template == false)
 		{
-			$filetofind = $this->_createFileName('', array('name' => 'default' . (isset($tpl) ? '_' . $tpl : $tpl)));
+			$filetofind = $this->_createFileName('', array('name' => 'txt' . (isset($tpl) ? '_' . $tpl : $tpl)));
 			$this->_template = JPath::find($this->_path['template'], $filetofind);
 		}
 
