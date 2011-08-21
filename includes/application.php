@@ -7,6 +7,10 @@ jimport('joomla.application.component.helper');
  * Joomla! Application class
  *
  * Provide many supporting API functions
+ * 
+ * Nicholas says: I have basically copied the application.php from Joomla! 1.7
+ * and modified it to use a hard-coded template name (see the getTemplate
+ * method for my dirty workarounds).
  *
  * @package		Joomla.Site
  * @subpackage	Application

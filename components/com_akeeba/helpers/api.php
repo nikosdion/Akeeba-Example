@@ -1,6 +1,12 @@
 <?php
 defined('_JEXEC') or die();
 
+/**
+ * This is the heart of the example application. This is a small helper class
+ * which communicates with a remote site's Akeeba Backup installation and
+ * performes remote API calls. You don't have to know how it works, just trust
+ * me when I say that it does work :p
+ */
 class AkeebaHelperApi
 {
 	/** @var string The hostname to use */

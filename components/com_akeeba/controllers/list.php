@@ -23,6 +23,8 @@ class AkeebaControllerList extends JController
 		
 		// Fetch all parameters using the app's JInput instance. Note how we do
 		// filtering by passing the appropriate filter in the third parameter.
+		// This also demonstrates how NOT to use JRequest, therefore making your
+		// code compatible with both CLI and web applications at the same time.
 		$host = $app->input->get('host', '', 'string');
 		$secret = $app->input->get('secret', '', 'string');
 		$tpl = $app->input->get('tpl', null);
@@ -49,7 +51,7 @@ class AkeebaControllerList extends JController
 		}
 		
 		// We need this fake object so that JModel doesn't try to connect to a
-		// database (we don't use any in our example)
+		// database (we don't use any in our example app)
 		$fooDbo = new JObject();
 		// And so, we create the model, populate its state and do nothing more
 		$model = $this->createModel('List','AkeebaModel',array('dbo' => $fooDbo));
@@ -58,23 +60,27 @@ class AkeebaControllerList extends JController
 		$model->setState('from',	$from);
 		$model->setState('to',		$to);
 		
-		// For the CLI app we use a special "format" identified, txt.
+		// For the CLI app we use a special hard-coded "format" identifier, txt.
 		$format = _CLIAPP ? 'txt' : $app->get('format','html','cmd');
-		// Get the view object and "tack" the model object to it
+		// Get the view object and attach the model object to it
 		$view = $this->getView('List',$format,'AkeebaView');
 		$view->setModel($model, true);
-		// Finally, as the view object to render itself.
+		// Finally, ask the view object to render itself.
 		$view->display($tpl);
 	}
 	
 	public function showUsage($cachable = false, $urlparams = false)
 	{
+		// This is a task which only runs in CLI mode, when there is no host
+		// or secret key defined.
 		if(!_CLIAPP) die("This view can not run in Web mode\n");
 		$view = $this->getView('Usage','txt','AkeebaView');
 		$view->display();
 	}
 	
 	public function params($cachable = false, $urlparams = false) {
+		// Converesely, this task only executes in the web mode, showing an
+		// interface for the user to enter site connection information
 		if(_CLIAPP) die("This view can not run in CLI mode\n");
 		
 		$view = $this->getView('Params','html','AkeebaView');

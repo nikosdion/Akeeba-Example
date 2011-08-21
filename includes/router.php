@@ -12,6 +12,9 @@ defined('JPATH_BASE') or die;
 
 /**
  * Class to create and parse routes for the site application
+ * 
+ * Nicholas says: even though we will never use SEF URLs, we need a router file.
+ * I just copied Joomla! 1.7's router.php file and put it in here.
  *
  * @package		Joomla.Site
  * @subpackage	Application
