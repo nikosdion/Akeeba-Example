@@ -6,6 +6,7 @@ jimport('joomla.application.component.controller');
 class AkeebaControllerList extends JController
 {
 	public function __construct($config = array()) {
+		jimport('joomla.environment.uri');
 		parent::__construct($config);
 		
 		$this->registerDefaultTask(_CLIAPP ? 'showList' : 'params');
@@ -60,7 +61,7 @@ class AkeebaControllerList extends JController
 		// For the CLI app we use a special "format" identified, txt.
 		$format = _CLIAPP ? 'txt' : $app->get('format','html','cmd');
 		// Get the view object and "tack" the model object to it
-		$view = $this->getView('List','txt','AkeebaView');
+		$view = $this->getView('List',$format,'AkeebaView');
 		$view->setModel($model, true);
 		// Finally, as the view object to render itself.
 		$view->display($tpl);
@@ -76,7 +77,6 @@ class AkeebaControllerList extends JController
 	public function params($cachable = false, $urlparams = false) {
 		if(_CLIAPP) die("This view can not run in CLI mode\n");
 		
-		jimport('joomla.environment.uri');
 		$view = $this->getView('Params','html','AkeebaView');
 		$view->display();
 	}

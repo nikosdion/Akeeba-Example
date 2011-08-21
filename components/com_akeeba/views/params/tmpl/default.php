@@ -17,11 +17,11 @@ defined('_JEXEC') or die('');
 		<legend>Connection parameters</legend>
 		
 		<label for="host">Hostname (e.g. <em>www.example.com</em>)</label>
-		<input type="text" name="host" id="host" value="" />
+		<input type="text" name="host" id="host" value="" autocomplete="false" />
 		<br/>
 		
 		<label for="secret">Secret key</label>
-		<input type="password" name="secret" id="secret" value="" />
+		<input type="password" name="secret" id="secret" value="" autocomplete="false" />
 		<br/>
 
 		<label>&nbsp;</label>
