@@ -70,7 +70,7 @@ class AkeebaexampleHelperApi
 
 		if(is_null($result->body->data)) {
 			JLog::add('Invalid (null) body data', JLog::ERROR);
-			throw new Exception('Invalid body data');
+			throw new Exception(JText::_('COM_AKEEBAEXAMPLE_APIERR_INVALIDBODYDATA'));
 		}
 
 		return $result;
@@ -106,7 +106,7 @@ class AkeebaexampleHelperApi
 		
 		if($response->code != 200) {
 			JLog::add('HTTP error '.$response->code, JLog::ERROR);
-			throw new Exception('HTTP Error '.$response->code);
+			throw new Exception(JText::sprintf('COM_AKEEBAEXAMPLE_APIERR_HTTPERROR',$response->code));
 		}
 		
 		$raw = $response->body;
@@ -123,7 +123,7 @@ class AkeebaexampleHelperApi
 		if(is_null($result)) {
 			JLog::add('JSON decoding error', JLog::ERROR);
 			JLog::add($json, JLog::DEBUG);
-			throw new Exception('JSON decoding error');
+			throw new Exception(JText::_('COM_AKEEBAEXAMPLE_APIERR_JSONDECODING'));
 		}
 		return $result;
 	}

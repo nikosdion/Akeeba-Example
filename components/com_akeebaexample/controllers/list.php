@@ -43,7 +43,7 @@ class AkeebaexampleControllerList extends JController
 			} else {
 				// Redirect
 				$app = JApplication::getInstance(0);
-				$msg = 'You need to tell me which site to connect to';
+				$msg = JText::_('COM_AKEEBAEXAMPLE_ERR_NOHOST');
 				$this->setRedirect('index.php?option=com_akeebaexample&view=list&task=params', $msg);
 				$this->redirect();
 				return;
@@ -73,7 +73,7 @@ class AkeebaexampleControllerList extends JController
 	{
 		// This is a task which only runs in CLI mode, when there is no host
 		// or secret key defined.
-		if(!_CLIAPP) die("This view can not run in Web mode\n");
+		if(!_CLIAPP) die(JText::_('COM_AKEEBAEXAMPLE_ERR_CLIONLY'));
 		$view = $this->getView('Usage','txt','AkeebaexampleView');
 		$view->display();
 	}
@@ -81,7 +81,7 @@ class AkeebaexampleControllerList extends JController
 	public function params($cachable = false, $urlparams = false) {
 		// Converesely, this task only executes in the web mode, showing an
 		// interface for the user to enter site connection information
-		if(_CLIAPP) die("This view can not run in CLI mode\n");
+		if(_CLIAPP) die(JText::_('COM_AKEEBAEXAMPLE_ERR_WEBONLY'));
 		
 		$view = $this->getView('Params','html','AkeebaexampleView');
 		$view->display();

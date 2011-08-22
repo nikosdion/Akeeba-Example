@@ -38,16 +38,16 @@ class AkeebaexampleModelList extends JModel
 			}
 
 			if(!$works) {
-				throw new JException('There is no way I can connect to your site; everything crashes and burns!');
+				throw new Exception(JText::_('COM_AKEEBAEXAMPLE_ERR_NOWAY'));
 			} else {
 				// Check the response
 				if($ret->body->status != 200) {
-					throw new JException('Error '.$ret->body->status." - ".$ret->body->data);
+					throw new Exception(JText::sprintf('COM_AKEEBAEXAMPLE_ERR_REMOTE',$ret->body->status,$ret->body->data));
 				}
 
 				// Check the API version
 				if($ret->body->data->api < 306) {
-					throw new JException('You need to install a newer version of Akeeba Backup on your site');
+					throw new Exception(JText::_('COM_AKEEBAEXAMPLE_ERR_VERSION'));
 				}
 			}
 			
@@ -58,7 +58,7 @@ class AkeebaexampleModelList extends JModel
 			$data = $api->doQuery('listBackups', array('from' => $from, 'limit' => $limit));
 
 			if($data->body->status != 200) {
-				throw new JException("Could not list backup records");
+				throw new JException(JText::_('COM_AKEEBAEXAMPLE_ERR_CANTLISTBACKUPS'));
 			} else {
 				$this->_list = $data->body->data;
 			}
