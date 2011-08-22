@@ -1,30 +1,25 @@
 <?php
 defined('_JEXEC') or die('');
 ?>
-<h2>Connect to your site</h2>
+<h2><?php echo JText::_('COM_AKEEBAEXAMPLE_CONNECTTOYOURSITE') ?></h2>
 
-<p>
-	Before you can see a list of your backups, you need to provide the conenction
-	information to your site below. Please remember to turn on the <em>Enable
-	remote and front-end backups</em> option in your Akeeba Backup Component 
-	Parameters before using this application.
-</p>
+<p><?php echo JText::_('COM_AKEEBAEXAMPLE_CONNECTIONINFO') ?></p>
 
 <form action="index.php" method="get">
 	<input type="hidden" name="view" value="list" />
 	<input type="hidden" name="task" value="showList" />
 	<fieldset>
-		<legend>Connection parameters</legend>
+		<legend><?php echo JText::_('COM_AKEEBAEXAMPLE_CONNECTIONPARAMETERS'); ?></legend>
 		
-		<label for="host">Hostname (e.g. <em>www.example.com</em>)</label>
-		<input type="text" name="host" id="host" value="" autocomplete="false" />
+		<label for="host"><?php echo JText::_('COM_AKEEBAEXAMPLE_CONNECTIONPARAMETERS_HOSTNAME') ?></label>
+		<input type="text" name="host" id="host" value="" autocomplete="off" />
 		<br/>
 		
-		<label for="secret">Secret key</label>
-		<input type="password" name="secret" id="secret" value="" autocomplete="false" />
+		<label for="secret"><?php echo JText::_('COM_AKEEBAEXAMPLE_CONNECTIONPARAMETERS_SECRET') ?></label>
+		<input type="password" name="secret" id="secret" value="" autocomplete="off" />
 		<br/>
 
 		<label>&nbsp;</label>
-		<input type="submit" />
+		<input type="submit" value="<?php echo JText::_('COM_AKEEBAEXAMPLE_CONNECTIONPARAMETERS_GETLIST')?>" />
 	</fieldset>
 </form>

@@ -3,7 +3,7 @@
 define('_JEXEC', 1);
 
 // Enable for debugging purposes only
-/**/
+/**
 error_reporting(E_ALL | E_NOTICE);
 define('JDEBUG',1);
 /**/
@@ -34,6 +34,9 @@ if( array_key_exists('REQUEST_METHOD', $_SERVER) )
 	// This is a web application
 	define('_CLIAPP', 0);
 	
+	// Required for when handling routing errors
+	jimport('joomla.environment.uri');
+	
 	// Workarounds required for web applications
 	@ini_set('magic_quotes_runtime', 0);
 	// I am not sure this is required with PHP 5.2 or later...
@@ -45,12 +48,6 @@ if( array_key_exists('REQUEST_METHOD', $_SERVER) )
 	define('JPATH_INSTALLATION', JPATH_BASE.'/installation');
 	define('JPATH_CACHE', JPATH_BASE.'/cache');
 	
-	// This is where you load the language files. Note that we have to load
-	// the lib_joomla translation file manually so that any library errors are
-	// proper English strings instead of language keys ;)
-	JFactory::getConfig()->set('language', 'en-GB');
-	JFactory::getLanguage()->load('lib_joomla');
-
 	// OK, another case of deep magic here. JApplication supports three client
 	// names. Using the "site" client name forces it to look in
 	// JPATH_BASE.'/includes/application.php' for a class named JSite.

@@ -1,25 +1,25 @@
 <?php defined('_JEXEC') or die(); ?>
 
 <?php if(!count($this->items)): ?>
-<h2>No backup records</h2>
-<p>Sorry, the site you specified indicates that there are no backup records available.</p>
+<h2><?php echo JText::_('COM_AKEEBAEXAMPLE_LIST_NORECORDS') ?></h2>
+<p><?php echo JText::_('COM_AKEEBAEXAMPLE_LIST_NORECORDSEXPLANATION');?></p>
 <?php else: ?>
 
 <table width="100%" border="1">
 	<thead>
 		<tr>
-			<th rowspan="2">ID</th>
-			<th rowspan="2">Description</th>
-			<th colspan="2">Backup</th>
-			<th rowspan="2">Status</th>
-			<th rowspan="2">Origin</th>
-			<th rowspan="2">Type</th>
-			<th rowspan="2">Profile ID</th>
-			<th rowspan="2">Total Size</th>
+			<th rowspan="2"><?php echo JText::_('COM_AKEEBAEXAMPLE_LIST_FIELD_ID');?></th>
+			<th rowspan="2"><?php echo JText::_('COM_AKEEBAEXAMPLE_LIST_FIELD_DESCRIPTION');?></th>
+			<th colspan="2"><?php echo JText::_('COM_AKEEBAEXAMPLE_LIST_FIELD_BACKUP');?></th>
+			<th rowspan="2"><?php echo JText::_('COM_AKEEBAEXAMPLE_LIST_FIELD_STATUS');?></th>
+			<th rowspan="2"><?php echo JText::_('COM_AKEEBAEXAMPLE_LIST_FIELD_ORIGIN');?></th>
+			<th rowspan="2"><?php echo JText::_('COM_AKEEBAEXAMPLE_LIST_FIELD_TYPE');?></th>
+			<th rowspan="2"><?php echo JText::_('COM_AKEEBAEXAMPLE_LIST_FIELD_PROFILEID');?></th>
+			<th rowspan="2"><?php echo JText::_('COM_AKEEBAEXAMPLE_LIST_FIELD_TOTALSIZE');?></th>
 		</tr>
 		<tr>
-			<th>Start</th>
-			<th>Duration (sec)</th>
+			<th><?php echo JText::_('COM_AKEEBAEXAMPLE_LIST_FIELD_START');?></th>
+			<th><?php echo JText::_('COM_AKEEBAEXAMPLE_LIST_FIELD_DURATION');?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -47,5 +47,5 @@
 
 <?php endif; ?>
 
-<p><a href="index.php">Go back to the first page</a></p>
+<p><a href="index.php"><?php echo JText::_('COM_AKEEBAEXAMPLE_LIST_GOBACK') ?></a></p>
 
