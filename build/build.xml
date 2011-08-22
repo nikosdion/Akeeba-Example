@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<project name="AkeebaExampleApp" description="Akeeba Joomla! Platform Application Example" default="all" >
+	<property file="./build.properties" />
+	<!-- Default properties, set only if not already assigned in the build.properties file -->
+	<property name="dirs.root" value=".." />
+	<property name="dirs.application" value="../application" />
+	<property name="dirs.release" value="../release" />
+	
+	<property name="version" value="dev" />
+
+	<property name="dirs.bin.release" value="../release" />
+
+	<taskdef name="zipme" classname="phingext.ZipmeTask" />
+	<taskdef name="gitversion" classname="phingext.GitVersionTask" />
+
+	<!--
+	====================================================================================================
+	Tasks - General
+	====================================================================================================
+	-->
+	
+	<target name="all" description="Makes everything"
+		depends="git">
+	</target>
+
+	<target name="git" description="Makes packages"
+		depends="new-release,setup-properties,app,pharapp,component">
+	</target>
+	
+	<target name="new-release" description="Create afresh the release directory">
+		<delete dir="${dirs.release}" quiet="yes" includeemptydirs="true" />
+		<mkdir dir="${dirs.release}" />
+	</target>
+
+	<target name="setup-properties" description="Set up version and build properties">
+		<!-- Initialize the build.date timestamp -->
+		<tstamp>
+			<format property="build.date" pattern="%Y-%m-%d" />
+		</tstamp>
+
+		<!-- Initialize the version if it's not set -->
+		<if>
+			<equals arg1="${version}" arg2="git" />
+			<then>
+				<gitversion workingcopy="${dirs.root}" propertyname="git.lastrevision" />
+				<property name="version" value="git_${git.lastrevision}" override="true" />
+			</then>
+		</if>
+	</target>
+	
+	<target name="app" description="Makes packages">
+		
+	</target>
+	
+	<target name="pharapp" description="Makes packages">
+		<pharpackage 
+			destfile="${dirs.release}/example.phar"
+			basedir="${dirs.application}"
+		>
+			<fileset dir="${dirs.application}">
+				<include name="**" />
+			</fileset>
+			<metadata>
+				<element name="version" value="${version}" />
+					<element name="authors">
+						<element name="Nicholas K. Dionysopoulos">
+						<element name="e-mail" value="nicholas@akeebabackup.com" />
+					</element>
+				</element>
+			</metadata>
+		</pharpackage>
+	</target>
+	
+	<target name="component" description="Makes packages">
+		
+	</target>
+
+</project>

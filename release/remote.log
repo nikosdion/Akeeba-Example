@@ -1,0 +1,17 @@
+#Date: 2011-08-22 12:57:57 UTC
+#Software: Joomla Platform 11.2.0 Stable [ Omar ] 27-Jul-2011 00:00 GMT
+
+#Fields: datetime	priority	message
+2011-08-22T12:57:57+00:00	DEBUG	Initialising component
+2011-08-22T12:57:57+00:00	WARNING	JError::raise() is deprecated.
+2011-08-22T12:57:57+00:00	WARNING	JException is deprecated.
+2011-08-22T12:57:57+00:00	WARNING	JError::addToStack() is deprecated.
+2011-08-22T12:57:57+00:00	WARNING	JError::throwError() is deprecated.
+2011-08-22T12:57:57+00:00	WARNING	JError::getErrorHandling() is deprecated.
+2011-08-22T12:57:57+00:00	WARNING	JError::handleCallback() is deprecated.
+2011-08-22T12:57:57+00:00	WARNING	JError::customErrorPage() is deprecated.
+2011-08-22T12:57:57+00:00	WARNING	JError::raiseError() is deprecated.
+2011-08-22T12:57:57+00:00	WARNING	JError::raise() is deprecated.
+2011-08-22T12:57:57+00:00	WARNING	JException is deprecated.
+2011-08-22T12:57:57+00:00	WARNING	JError::addToStack() is deprecated.
+2011-08-22T12:57:57+00:00	WARNING	JError::throwError() is deprecated.

@@ -30,11 +30,19 @@ class Akeebaexample extends JCli {
 			$lang->load('com_akeebaexample', JPATH_BASE, $userLangCode, true);
 		}
 		
-		// Start logging
+		// Start logging. If we are running off a PHAR archive, the log file
+		// will be placed in the directory where the PHAR archive is in.
+		// Otherwise we'll just use the logs directory.
+		if(class_exists('Phar')) {
+			$inPhar = Phar::running(false);
+			$pharFilename = substr(Phar::running(true), 7);
+		} else {
+			$inPhar = false;
+		}
 		jimport('joomla.log.log');
 		$options = array(
 			'text_file'			=> 'remote.log',
-			'text_file_path'	=> JPATH_BASE.'/logs',
+			'text_file_path'	=> $inPhar ? dirname($pharFilename) : JPATH_BASE.'/logs',
 			'text_file_no_php'	=> true,
 			'text_entry_format'	=> '{DATETIME}	{PRIORITY}	{MESSAGE}'
 		);
