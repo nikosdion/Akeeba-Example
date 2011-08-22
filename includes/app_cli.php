@@ -3,7 +3,7 @@ defined('JPATH_PLATFORM') or die();
 
 jimport('joomla.application.cli');
 
-class Akeeba extends JCli {
+class Akeebaexample extends JCli {
 	public function execute()
 	{
 		jimport('joomla.log.log');
@@ -16,6 +16,6 @@ class Akeeba extends JCli {
 		JLog::addLogger($options);
 		
 		JLog::add('Initialising component', JLog::DEBUG);
-		require_once JPATH_COMPONENT.'/akeeba.php';
+		require_once JPATH_COMPONENT.'/akeebaexample.php';
 	}
 }

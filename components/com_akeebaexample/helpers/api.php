@@ -7,7 +7,7 @@ defined('_JEXEC') or die();
  * performes remote API calls. You don't have to know how it works, just trust
  * me when I say that it does work :p
  */
-class AkeebaHelperApi
+class AkeebaexampleHelperApi
 {
 	/** @var string The hostname to use */
 	private $_host = '';
@@ -23,8 +23,8 @@ class AkeebaHelperApi
 
 	/**
 	 *
-	 * @staticvar AkeebaHelperApi $instance
-	 * @return AkeebaHelperApi
+	 * @staticvar AkeebaexampleHelperApi $instance
+	 * @return AkeebaexampleHelperApi
 	 */
 	public static function getInstance()
 	{

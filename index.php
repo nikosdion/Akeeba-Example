@@ -3,8 +3,9 @@
 define('_JEXEC', 1);
 
 // Enable for debugging purposes only
-/**
+/**/
 error_reporting(E_ALL | E_NOTICE);
+define('JDEBUG',1);
 /**/
 
 // We start by defining all the paths required by the Joomla! platform in order
@@ -62,9 +63,11 @@ if( array_key_exists('REQUEST_METHOD', $_SERVER) )
 	// JFactory::getApplication('site') is that this generates the error message
 	// "Not connected to server.". Huh!
 	JFactory::$application = $app;
+	// Set the debug mode, if necessary
+	if(defined('JDEBUG') && (JDEBUG == 1)) JFactory::getConfig()->set('debug', 1);
 	// Next up, we dispatch the application. Note how we force the component
 	// name.
-	$app->dispatch('com_akeeba');
+	$app->dispatch('com_akeebaexample');
 	// Let the application render itself (basically, mix the component output
 	// with the template-generated HTML code)
 	$app->render();
@@ -76,6 +79,6 @@ if( array_key_exists('REQUEST_METHOD', $_SERVER) )
 	
 	// Things are much easier. Just include the CLI app class and execute it
 	JLoader::import('includes.app_cli', JPATH_BASE);
-	define('JPATH_COMPONENT', dirname(__FILE__).'/components/com_akeeba');
-	JCli::getInstance('Akeeba')->execute();
+	define('JPATH_COMPONENT', dirname(__FILE__).'/components/com_akeebaexample');
+	JCli::getInstance('Akeebaexample')->execute();
 }

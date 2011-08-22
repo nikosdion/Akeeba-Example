@@ -1,16 +1,16 @@
 <?php
 defined('_JEXEC') or die();
 
-JLoader::import('includes.custom.view.cli', JPATH_BASE);
+jimport('joomla.application.component.view');
 
-class AkeebaViewList extends CustomViewCli
+class AkeebaexampleViewList extends JView
 {
 	public function display($tpl = null) {
 		$model = $this->getModel();
 		$list = $model->getList();
 		
 		$this->assignRef('items', $list);
-		
+
 		parent::display($tpl);
 	}
 }

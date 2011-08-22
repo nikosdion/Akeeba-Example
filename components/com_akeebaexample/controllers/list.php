@@ -3,7 +3,7 @@ defined('_JEXEC') or die();
 
 jimport('joomla.application.component.controller');
 
-class AkeebaControllerList extends JController
+class AkeebaexampleControllerList extends JController
 {
 	public function __construct($config = array()) {
 		jimport('joomla.environment.uri');
@@ -16,7 +16,7 @@ class AkeebaControllerList extends JController
 		// This trick allows us to get a global application instance, depending
 		// on whether we are running under the CLI or a web interface
 		if(_CLIAPP) {
-			$app = JCli::getInstance('Akeeba');
+			$app = JCli::getInstance('Akeebaexample');
 		} else {
 			$app = JFactory::getApplication();
 		}
@@ -44,7 +44,7 @@ class AkeebaControllerList extends JController
 				// Redirect
 				$app = JApplication::getInstance(0);
 				$msg = 'You need to tell me which site to connect to';
-				$this->setRedirect('index.php?option=com_akeeba&view=list&task=params', $msg);
+				$this->setRedirect('index.php?option=com_akeebaexample&view=list&task=params', $msg);
 				$this->redirect();
 				return;
 			}
@@ -54,7 +54,7 @@ class AkeebaControllerList extends JController
 		// database (we don't use any in our example app)
 		$fooDbo = new JObject();
 		// And so, we create the model, populate its state and do nothing more
-		$model = $this->createModel('List','AkeebaModel',array('dbo' => $fooDbo));
+		$model = $this->createModel('List','AkeebaexampleModel',array('dbo' => $fooDbo));
 		$model->setState('host',	$host);
 		$model->setState('secret',	$secret);
 		$model->setState('from',	$from);
@@ -63,7 +63,7 @@ class AkeebaControllerList extends JController
 		// For the CLI app we use a special hard-coded "format" identifier, txt.
 		$format = _CLIAPP ? 'txt' : $app->get('format','html','cmd');
 		// Get the view object and attach the model object to it
-		$view = $this->getView('List',$format,'AkeebaView');
+		$view = $this->getView('List',$format,'AkeebaexampleView');
 		$view->setModel($model, true);
 		// Finally, ask the view object to render itself.
 		$view->display($tpl);
@@ -74,7 +74,7 @@ class AkeebaControllerList extends JController
 		// This is a task which only runs in CLI mode, when there is no host
 		// or secret key defined.
 		if(!_CLIAPP) die("This view can not run in Web mode\n");
-		$view = $this->getView('Usage','txt','AkeebaView');
+		$view = $this->getView('Usage','txt','AkeebaexampleView');
 		$view->display();
 	}
 	
@@ -83,7 +83,7 @@ class AkeebaControllerList extends JController
 		// interface for the user to enter site connection information
 		if(_CLIAPP) die("This view can not run in CLI mode\n");
 		
-		$view = $this->getView('Params','html','AkeebaView');
+		$view = $this->getView('Params','html','AkeebaexampleView');
 		$view->display();
 	}
 }

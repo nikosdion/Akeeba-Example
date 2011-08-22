@@ -1,7 +1,7 @@
 <?php
 defined('_JEXEC') or die();
 
-$app = JCli::getInstance('Akeeba');
+$app = JCli::getInstance('Akeebaexample');
 
 foreach($this->items as $record)
 {

@@ -3,7 +3,7 @@ defined('_JEXEC') or die();
 
 jimport('joomla.application.component.model');
 
-class AkeebaModelList extends JModel
+class AkeebaexampleModelList extends JModel
 {
 	private $_list = null;
 	
@@ -12,7 +12,7 @@ class AkeebaModelList extends JModel
 		if(is_null($this->_list)) {
 			// Get an Akeeba Remote API Helper instance
 			require_once JPATH_COMPONENT.'/helpers/api.php';
-			$api = new AkeebaHelperApi();
+			$api = new AkeebaexampleHelperApi();
 			$api->host = $this->getState('host');
 			$api->secret = $this->getState('secret');
 
@@ -31,7 +31,7 @@ class AkeebaModelList extends JModel
 						$ret = $api->doQuery('getVersion', array());
 						$works = true;
 						$this->_versionInfo = $ret->body->data;
-					} catch (JException $e) {
+					} catch (Exception $e) {
 						$exception = $e;
 					}
 				}
