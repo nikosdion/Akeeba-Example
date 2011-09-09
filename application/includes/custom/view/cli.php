@@ -88,6 +88,7 @@ class CustomViewCli extends JView
 	
 	protected function _setPath($type, $path)
 	{
+		JLog::add('In '.__CLASS__.'::'.__METHOD__, JLog::DEBUG);
 		jimport('joomla.application.helper');
 		$component = 'com_example';
 
@@ -100,6 +101,7 @@ class CustomViewCli extends JView
 	
 	public function loadTemplate($tpl = null)
 	{
+		JLog::add('In '.__CLASS__.'::'.__METHOD__, JLog::DEBUG);
 		// clear prior output
 		$this->_output = null;
 

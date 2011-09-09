@@ -24,7 +24,7 @@
 	</target>
 
 	<target name="git" description="Makes packages"
-		depends="new-release,setup-properties,app,pharapp,component">
+		depends="new-release,setup-properties,app,component">
 	</target>
 	
 	<target name="new-release" description="Create afresh the release directory">
@@ -48,30 +48,16 @@
 		</if>
 	</target>
 	
-	<target name="app" description="Makes packages">
-		
-	</target>
-	
-	<target name="pharapp" description="Makes packages">
-		<pharpackage 
-			destfile="${dirs.release}/example.phar"
-			basedir="${dirs.application}"
-		>
+	<target name="app" description="Makes packages" depends="setup-properties">
+		<zipme basedir="${dirs.application}" destfile="${dirs.release}/exampleapp-${version}.zip" includeemptydirs="true">
 			<fileset dir="${dirs.application}">
 				<include name="**" />
+				<exclude name="logs/**" />
 			</fileset>
-			<metadata>
-				<element name="version" value="${version}" />
-					<element name="authors">
-						<element name="Nicholas K. Dionysopoulos">
-						<element name="e-mail" value="nicholas@akeebabackup.com" />
-					</element>
-				</element>
-			</metadata>
-		</pharpackage>
+		</zipme>
 	</target>
 	
-	<target name="component" description="Makes packages">
+	<target name="component" description="Makes component packages">
 		
 	</target>
 

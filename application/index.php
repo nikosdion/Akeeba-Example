@@ -9,8 +9,8 @@ define('JDEBUG',1);
 /**/
 
 // We start by defining all the paths required by the Joomla! platform in order
-// to spawn an application. If you only need a CLI app, only JPATCH_LIBRARIES
-// is required
+// to spawn an application. If you only need a CLI app, only JPATH_LIBRARIES
+// is required.
 define('JPATH_BASE',			dirname(__FILE__));
 define('JPATH_ROOT',			JPATH_BASE);
 define('JPATH_SITE',			JPATH_ROOT);
@@ -76,6 +76,6 @@ if( array_key_exists('REQUEST_METHOD', $_SERVER) )
 	
 	// Things are much easier. Just include the CLI app class and execute it
 	JLoader::import('includes.app_cli', JPATH_BASE);
-	define('JPATH_COMPONENT', dirname(__FILE__).'/components/com_akeebaexample');
+	define('JPATH_COMPONENT', JPATH_BASE.'/components/com_akeebaexample');
 	JCli::getInstance('Akeebaexample')->execute();
 }
